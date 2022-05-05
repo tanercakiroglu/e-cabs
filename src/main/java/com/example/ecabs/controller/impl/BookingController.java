@@ -10,11 +10,8 @@ import com.example.ecabs.model.response.WrapperResponse;
 import com.example.ecabs.service.BookingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/bookings")
@@ -36,12 +33,12 @@ public class BookingController implements BookingOperations {
     }
 
     @Override
-    public WrapperResponse<BookingDTO> save(@Valid @RequestBody SaveBookingRequest request) {
+    public WrapperResponse<BookingDTO> save(SaveBookingRequest request) {
         return WrapperResponse.of(bookingService.sendToRabbit(request));
     }
 
     @Override
-    public WrapperResponse<BookingDTO> update(@Valid UpdateBookingRequest request) {
+    public WrapperResponse<BookingDTO> update(UpdateBookingRequest request) {
         return WrapperResponse.of(bookingService.sendToRabbit(request));
     }
 

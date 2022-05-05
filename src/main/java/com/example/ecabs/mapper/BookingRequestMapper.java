@@ -6,10 +6,10 @@ import com.example.ecabs.model.request.UpdateBookingRequest;
 import com.example.ecabs.util.MapperUtils;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring" ,uses = MapperUtils.class)
+@Mapper(componentModel = "spring", uses = MapperUtils.class)
 public interface BookingRequestMapper {
 
-   BookingDTO saveRequestToDto(SaveBookingRequest request);
+    BookingDTO saveRequestToDto(SaveBookingRequest request);
 
-   BookingDTO updateRequestToDto(UpdateBookingRequest request);
+    BookingDTO updateRequestToDto(UpdateBookingRequest request);
 }

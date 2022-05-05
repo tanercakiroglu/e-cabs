@@ -24,7 +24,7 @@ public class WrapperResponse<T> extends AbstractResponse {
     }
 
 
-    public static<T> WrapperResponse<T> empty() {
+    public static <T> WrapperResponse<T> empty() {
         @SuppressWarnings("unchecked")
         WrapperResponse<T> t = (WrapperResponse<T>) EMPTY;
         return t;

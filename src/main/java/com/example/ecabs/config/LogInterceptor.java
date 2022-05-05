@@ -16,12 +16,12 @@ import java.lang.reflect.Method;
 public class LogInterceptor {
 
 
-    @Around(value = "@annotation(loggable)" , argNames = "joinPoint,loggable")
+    @Around(value = "@annotation(loggable)", argNames = "joinPoint,loggable")
     public Object performanceLogMethod(ProceedingJoinPoint joinPoint, Loggable loggable) throws Throwable {
         return performanceLogging(joinPoint, loggable);
     }
 
-    @Around(value = "@within(loggable)" , argNames = "joinPoint,loggable")
+    @Around(value = "@within(loggable)", argNames = "joinPoint,loggable")
     public Object performanceLogClass(ProceedingJoinPoint joinPoint, Loggable loggable) throws Throwable {
         return performanceLogging(joinPoint, loggable);
     }
@@ -33,7 +33,7 @@ public class LogInterceptor {
         try {
             stopWatch.start();
             methodReturn = joinPoint.proceed();
-        }finally {
+        } finally {
             stopWatch.stop();
             final var logMessage = new StringBuilder();
             if (loggable == null) {

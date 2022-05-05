@@ -15,7 +15,7 @@ public class RabbitReceiverServiceImpl implements RabbitReceiverService {
 
     @RabbitListener(queues = "${e-cabs.rabbitmq.queue.add}")
     public void receivedAddBookingMessage(BookingDTO bookingDTO) {
-      bookingService.save(bookingDTO);
+        bookingService.save(bookingDTO);
     }
 
     @RabbitListener(queues = "${e-cabs.rabbitmq.queue.edit}")

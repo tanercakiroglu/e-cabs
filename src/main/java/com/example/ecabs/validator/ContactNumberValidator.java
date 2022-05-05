@@ -7,7 +7,7 @@ import javax.validation.ConstraintValidatorContext;
 import java.util.regex.Pattern;
 
 @Component
-public class ContactNumberValidator implements  ConstraintValidator<ValidContactNumber, String>  {
+public class ContactNumberValidator implements ConstraintValidator<ValidContactNumber, String> {
     private static final Pattern pattern = Pattern.compile("^(\\+\\d{1,3}( )?)?((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$");
 
 

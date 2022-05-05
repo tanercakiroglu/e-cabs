@@ -36,7 +36,7 @@ public class WrapperCollectionResponse<T> extends AbstractResponse {
     private WrapperCollectionResponse(Collection<T> value) {
         this.data = CollectionUtils.isEmpty(value) ? Collections.emptyList() : value;
         this.totalSize = CollectionUtils.isEmpty(value) ? 0L : value.size();
-        this.status= HttpStatus.OK.value();
+        this.status = HttpStatus.OK.value();
     }
 
     public static <T> WrapperCollectionResponse<T> of(Collection<T> value) {

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class RabbitSenderServiceImpl implements RabbitSenderService {
 
-    private  final AmqpTemplate amqpTemplate;
+    private final AmqpTemplate amqpTemplate;
 
     @Value("${e-cabs.rabbitmq.exchange}")
     String exchange;
@@ -27,7 +27,7 @@ public class RabbitSenderServiceImpl implements RabbitSenderService {
 
 
     @Override
-    public void sendAddBooking(BookingDTO bookingDTO){
+    public void sendAddBooking(BookingDTO bookingDTO) {
         amqpTemplate.convertAndSend(exchange, addRoutingKey, bookingDTO);
     }
 

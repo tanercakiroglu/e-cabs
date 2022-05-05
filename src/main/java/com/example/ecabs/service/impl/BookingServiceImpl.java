@@ -67,7 +67,7 @@ public class BookingServiceImpl implements BookingService {
     @Override
     @Transactional
     public void deleteByExample(BookingDTO bookingDTO) {
-          bookingRepository.delete(bookingMapper.toEntity(bookingDTO));
+        bookingRepository.delete(bookingMapper.toEntity(bookingDTO));
     }
 
     @Override

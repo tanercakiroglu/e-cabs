@@ -58,6 +58,7 @@ public class GlobalExceptionHandler {
                 .errorMessage(List.of(errorMessages))
                 .build();
     }
+
     @ExceptionHandler({EntityNotFoundException.class})
     @ResponseStatus(value = NOT_FOUND)
     public WrapperResponse resourceNotFoundException(EntityNotFoundException ex, WebRequest request) {

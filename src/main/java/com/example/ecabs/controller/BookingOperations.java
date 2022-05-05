@@ -21,7 +21,7 @@ public interface BookingOperations {
     WrapperResponse<BookingDTO> save(@Valid @RequestBody SaveBookingRequest request);
 
     @PutMapping("/")
-    WrapperResponse<BookingDTO> update(@Valid  @RequestBody UpdateBookingRequest request);
+    WrapperResponse<BookingDTO> update(@Valid @RequestBody UpdateBookingRequest request);
 
     @DeleteMapping("/{id}")
     WrapperResponse<BookingDTO> deleteById(@PathVariable Long id);

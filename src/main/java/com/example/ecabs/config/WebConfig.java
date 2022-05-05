@@ -15,7 +15,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Bean
     public LocaleResolver localeResolver() {
         final var resolver = new AcceptHeaderLocaleResolver();
-        final var turkishLocale = new Locale("tr","TR");
+        final var turkishLocale = new Locale("tr", "TR");
         resolver.setSupportedLocales(Arrays.asList(turkishLocale, Locale.US));
         resolver.setDefaultLocale(turkishLocale);
         return resolver;

@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -17,9 +17,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class SaveBookingRequest {
 
-    private Long id;
-
-    @NotEmpty(message = "booking.passenger-name.invalid")
+    @NotBlank(message = "booking.passenger-name.invalid")
     private String passengerName;
 
     @ValidContactNumber(message = "booking.passenger-contact-number.invalid")
@@ -35,10 +33,6 @@ public class SaveBookingRequest {
     private BigDecimal price;
 
     private Integer rating;
-
-    private LocalDateTime createDateTime;
-
-    private LocalDateTime updateDateTime;
 
     private Set<TripWaypointDTO> tripWaypointSet;
 }

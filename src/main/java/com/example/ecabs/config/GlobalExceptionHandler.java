@@ -17,9 +17,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import static com.example.ecabs.constant.ErrorCodes.ENTITY_NOT_FOUND;
 import static com.example.ecabs.constant.ErrorCodes.RESOURCE_NOT_FOUND;
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.*;
 
 
 @ControllerAdvice
@@ -33,9 +33,22 @@ public class GlobalExceptionHandler {
         this.messageSource = messageSource;
     }
 
-    @ExceptionHandler({ResourceNotFoundException.class, EntityNotFoundException.class})
+
+    @ExceptionHandler({Exception.class})
+    @ResponseStatus(value = INTERNAL_SERVER_ERROR)
+    public WrapperResponse generalExceptionHandler(Exception ex, WebRequest request) {
+
+        log.error("Exception  ", ex);
+        return WrapperResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(INTERNAL_SERVER_ERROR.value())
+                .errorMessage(List.of(ex.getMessage()))
+                .build();
+    }
+
+    @ExceptionHandler({ResourceNotFoundException.class})
     @ResponseStatus(value = NOT_FOUND)
-    public WrapperResponse resourceNotFoundException(ResourceNotFoundException ex, WebRequest request) {
+    public WrapperResponse resourceNotFoundException(Exception ex, WebRequest request) {
 
         var errorMessages = messageSource.getMessage(RESOURCE_NOT_FOUND, null, request.getLocale());
         log.error("ResourceNotFoundException ", ex);
@@ -45,10 +58,22 @@ public class GlobalExceptionHandler {
                 .errorMessage(List.of(errorMessages))
                 .build();
     }
+    @ExceptionHandler({EntityNotFoundException.class})
+    @ResponseStatus(value = NOT_FOUND)
+    public WrapperResponse resourceNotFoundException(EntityNotFoundException ex, WebRequest request) {
 
-    @ExceptionHandler(value = {IllegalArgumentException.class, HttpMessageNotReadableException.class})
+        var errorMessages = messageSource.getMessage(ENTITY_NOT_FOUND, new String[]{ex.getMessage()}, request.getLocale());
+        log.error("EntityNotFoundException ", ex);
+        return WrapperResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(NOT_FOUND.value())
+                .errorMessage(List.of(errorMessages))
+                .build();
+    }
+
+    @ExceptionHandler(value = {IllegalArgumentException.class})
     @ResponseStatus(value = BAD_REQUEST)
-    public WrapperResponse illegalArgumentExceptionErrorHandler(IllegalArgumentException ex, WebRequest request) {
+    public WrapperResponse illegalArgumentExceptionErrorHandler(Exception ex) {
         log.error("IllegalArgumentException ", ex);
         return WrapperResponse.builder()
                 .timestamp(LocalDateTime.now())
@@ -70,6 +95,17 @@ public class GlobalExceptionHandler {
                 .timestamp(LocalDateTime.now())
                 .status(BAD_REQUEST.value())
                 .errorMessage(errorMessages)
+                .build();
+    }
+
+    @ExceptionHandler(value = {HttpMessageNotReadableException.class})
+    @ResponseStatus(value = BAD_REQUEST)
+    public WrapperResponse httpMessageNotReadableExceptionErrorHandler(HttpMessageNotReadableException ex) {
+        log.error("HttpMessageNotReadableException ", ex);
+        return WrapperResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(BAD_REQUEST.value())
+                .errorMessage(List.of(ex.getMessage()))
                 .build();
     }
 

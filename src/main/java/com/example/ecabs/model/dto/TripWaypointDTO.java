@@ -1,7 +1,6 @@
 package com.example.ecabs.model.dto;
 
 
-import com.example.ecabs.entity.Booking;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,5 +16,4 @@ public class TripWaypointDTO {
 
     private BigDecimal longitude;
 
-    private Booking booking;
 }

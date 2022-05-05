@@ -19,16 +19,25 @@ public class RabbitSenderServiceImpl implements RabbitSenderService {
     @Value("${e-cabs.rabbitmq.routing-key.add}")
     String addRoutingKey;
 
-    @Value("${e-cabs.rabbitmq.routing-key.delete}")
+    @Value("${e-cabs.rabbitmq.routing-key.edit}")
     String editRoutingKey;
 
-    @Value("${e-cabs.rabbitmq.routing-key.edit}")
+    @Value("${e-cabs.rabbitmq.routing-key.delete}")
     String deleteRoutingKey;
 
 
     @Override
     public void sendAddBooking(BookingDTO bookingDTO){
         amqpTemplate.convertAndSend(exchange, addRoutingKey, bookingDTO);
+    }
 
+    @Override
+    public void sendEditBooking(BookingDTO bookingDTO) {
+        amqpTemplate.convertAndSend(exchange, editRoutingKey, bookingDTO);
+    }
+
+    @Override
+    public void sendDeleteBooking(BookingDTO bookingDTO) {
+        amqpTemplate.convertAndSend(exchange, deleteRoutingKey, bookingDTO);
     }
 }

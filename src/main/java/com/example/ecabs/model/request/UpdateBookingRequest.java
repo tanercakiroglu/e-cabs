@@ -37,9 +37,5 @@ public class UpdateBookingRequest {
 
     private Integer rating;
 
-    private LocalDateTime createDateTime;
-
-    private LocalDateTime updateDateTime;
-
     private Set<TripWaypointDTO> tripWaypointSet;
 }

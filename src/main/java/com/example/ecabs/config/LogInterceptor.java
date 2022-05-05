@@ -16,40 +16,54 @@ import java.lang.reflect.Method;
 public class LogInterceptor {
 
 
-    @Around(value = "@within(loggable) || @annotation(loggable)", argNames = "joinPoint,loggable")
-    public Object performanceLog(ProceedingJoinPoint joinPoint, Loggable loggable) throws Throwable {
+    @Around(value = "@annotation(loggable)" , argNames = "joinPoint,loggable")
+    public Object performanceLogMethod(ProceedingJoinPoint joinPoint, Loggable loggable) throws Throwable {
+        return performanceLogging(joinPoint, loggable);
+    }
+
+    @Around(value = "@within(loggable)" , argNames = "joinPoint,loggable")
+    public Object performanceLogClass(ProceedingJoinPoint joinPoint, Loggable loggable) throws Throwable {
+        return performanceLogging(joinPoint, loggable);
+    }
+
+    private Object performanceLogging(ProceedingJoinPoint joinPoint, Loggable loggable) throws Throwable {
         final var stopWatch = new StopWatch();
-        stopWatch.start();
+        var methodReturn = new Object();
 
-        final Object ret = joinPoint.proceed();
+        try {
+            stopWatch.start();
+            methodReturn = joinPoint.proceed();
+        }finally {
+            stopWatch.stop();
+            final var logMessage = new StringBuilder();
+            if (loggable == null) {
+                MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+                Method method = signature.getMethod();
+                loggable = method.getAnnotation(Loggable.class);
+            }
+            logMessage.append(loggable.value());
+            logMessage.append(" ");
+            logMessage.append(joinPoint.getSignature().getDeclaringType());
+            logMessage.append("-->");
+            logMessage.append(joinPoint.getSignature().getName());
+            logMessage.append("(");
+            // append args
+            Object[] args = joinPoint.getArgs();
+            for (Object arg : args) {
+                logMessage.append(arg).append(",");
+            }
+            if (args.length > 0) {
+                logMessage.deleteCharAt(logMessage.length() - 1);
+            }
 
-        stopWatch.stop();
-
-        final StringBuilder logMessage = new StringBuilder();
-        if (loggable == null) {
-            MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-            Method method = signature.getMethod();
-            loggable = method.getAnnotation(Loggable.class);
+            logMessage.append(")");
+            logMessage.append(" execution time: ");
+            logMessage.append(stopWatch.getTotalTimeMillis());
+            logMessage.append(" ms");
+            if (log.isInfoEnabled()) {
+                log.info(logMessage.toString());
+            }
         }
-        logMessage.append(loggable.value());
-        logMessage.append(joinPoint.getSignature().getName());
-        logMessage.append("(");
-        // append args
-        Object[] args = joinPoint.getArgs();
-        for (Object arg : args) {
-            logMessage.append(arg).append(",");
-        }
-        if (args.length > 0) {
-            logMessage.deleteCharAt(logMessage.length() - 1);
-        }
-
-        logMessage.append(")");
-        logMessage.append(" execution time: ");
-        logMessage.append(stopWatch.getTotalTimeMillis());
-        logMessage.append(" ms");
-        if (log.isInfoEnabled()) {
-            log.info(logMessage.toString());
-        }
-        return ret;
+        return methodReturn;
     }
 }

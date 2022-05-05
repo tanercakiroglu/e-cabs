@@ -1,7 +1,6 @@
 package com.example.ecabs.entity;
 
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -19,9 +18,9 @@ import java.util.Set;
 @Setter
 public class Booking {
 
-
     @Id
-    @Column(name = "ID", nullable = false)
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "PASSENGER_NAME")
@@ -46,12 +45,18 @@ public class Booking {
     private Integer rating;
 
     @CreationTimestamp
+    @Column(name = "CREATED_ON")
     private LocalDateTime createDateTime;
 
     @UpdateTimestamp
+    @Column(name = "LAST_MODIFIED_ON")
     private LocalDateTime updateDateTime;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "booking")
+    @OneToMany(
+            mappedBy = "booking",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     private Set<TripWaypoint> tripWaypointSet;
 
 }

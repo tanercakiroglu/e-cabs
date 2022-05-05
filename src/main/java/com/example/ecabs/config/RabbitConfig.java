@@ -2,7 +2,6 @@ package com.example.ecabs.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -31,10 +30,10 @@ public class RabbitConfig {
     @Value("${e-cabs.rabbitmq.routing-key.add}")
     String addRoutingKey;
 
-    @Value("${e-cabs.rabbitmq.routing-key.delete}")
+    @Value("${e-cabs.rabbitmq.routing-key.edit}")
     String editRoutingKey;
 
-    @Value("${e-cabs.rabbitmq.routing-key.edit}")
+    @Value("${e-cabs.rabbitmq.routing-key.delete}")
     String deleteRoutingKey;
 
 

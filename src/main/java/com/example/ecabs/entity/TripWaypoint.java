@@ -1,6 +1,5 @@
 package com.example.ecabs.entity;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,7 +14,8 @@ import java.math.BigDecimal;
 public class TripWaypoint {
 
     @Id
-    @Column(name = "ID", nullable = false)
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "LATITUDE", nullable = false)
@@ -27,9 +27,7 @@ public class TripWaypoint {
     private BigDecimal longitude;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="BOOKING_ID")
+    @JoinColumn(name = "BOOKING_ID")
     private Booking booking;
-
-
 
 }

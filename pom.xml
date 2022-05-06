@@ -20,8 +20,8 @@
     </properties>
 
     <modules>
-        <module>producer</module>
         <module>config</module>
+        <module>producer</module>
         <module>consumer</module>
     </modules>
 

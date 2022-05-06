@@ -4,6 +4,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.springframework.http.HttpStatus;
 
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -21,6 +22,7 @@ public class WrapperResponse<T> extends AbstractResponse {
 
     private WrapperResponse() {
         this.data = null;
+        this.status= HttpStatus.OK.value();
     }
 
 
@@ -32,6 +34,7 @@ public class WrapperResponse<T> extends AbstractResponse {
 
     private WrapperResponse(T value) {
         this.data = Objects.requireNonNull(value);
+        this.status= HttpStatus.OK.value();
     }
 
     public static <T> WrapperResponse<T> of(T value) {

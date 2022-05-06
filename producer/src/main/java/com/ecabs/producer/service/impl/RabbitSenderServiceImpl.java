@@ -14,8 +14,9 @@ public class RabbitSenderServiceImpl implements RabbitSenderService {
 
     private final AmqpTemplate amqpTemplate;
 
-    @Value("${e-cabs.rabbitmq.exchange}")
-    String exchange;
+
+    @Value("${e-cabs.rabbitmq.message.exchange}")
+    String messageExchange;
 
     @Value("${e-cabs.rabbitmq.routing-key.add}")
     String addRoutingKey;
@@ -29,16 +30,16 @@ public class RabbitSenderServiceImpl implements RabbitSenderService {
 
     @Override
     public void sendAddBooking(BookingDTO bookingDTO) {
-        amqpTemplate.convertAndSend(exchange, addRoutingKey, bookingDTO);
+        amqpTemplate.convertAndSend(messageExchange, addRoutingKey, bookingDTO);
     }
 
     @Override
     public void sendEditBooking(BookingDTO bookingDTO) {
-        amqpTemplate.convertAndSend(exchange, editRoutingKey, bookingDTO);
+        amqpTemplate.convertAndSend(messageExchange, editRoutingKey, bookingDTO);
     }
 
     @Override
     public void sendDeleteBooking(BookingDTO bookingDTO) {
-        amqpTemplate.convertAndSend(exchange, deleteRoutingKey, bookingDTO);
+        amqpTemplate.convertAndSend(messageExchange, deleteRoutingKey, bookingDTO);
     }
 }

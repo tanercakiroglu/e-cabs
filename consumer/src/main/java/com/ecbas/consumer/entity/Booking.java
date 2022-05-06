@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -16,8 +17,9 @@ import java.util.Set;
 @Table(name = "BOOKINGS")
 @Getter
 @Setter
-public class Booking {
+public class Booking implements Serializable {
 
+    private static final long serialVersionUID = -3161089711397340930L;
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,6 +36,9 @@ public class Booking {
 
     @Column(name = "WAITING_TIME")
     private Integer waitingTime;
+
+    @Column(name="ASAP")
+    private boolean asap;
 
     @Column(name = "NUMBER_OF_PASSENGERS")
     private Integer numberOfPassengers;

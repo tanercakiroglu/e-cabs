@@ -1,4 +1,4 @@
-package com.ecbas.consumer.configuration;
+package com.ecbas.audit.consumer.configuration;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;

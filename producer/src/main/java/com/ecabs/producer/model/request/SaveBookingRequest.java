@@ -1,7 +1,7 @@
 package com.ecabs.producer.model.request;
 
-import com.ecabs.producer.model.dto.TripWaypointDTO;
 import com.ecabs.config.validator.ValidContactNumber;
+import com.ecabs.producer.model.dto.TripWaypointDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,6 +27,8 @@ public class SaveBookingRequest {
     private LocalDateTime pickUpTime;
 
     private Integer waitingTime;
+
+    private boolean isAsap;
 
     private Integer numberOfPassengers;
 

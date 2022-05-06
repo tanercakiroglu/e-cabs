@@ -24,8 +24,14 @@ public class RabbitConfig {
     @Value("${e-cabs.rabbitmq.queue.delete}")
     String deleteQueueName;
 
+    @Value("${e-cabs.rabbitmq.queue.message-audit}")
+    String messageAuditQueueName;
+
     @Value("${e-cabs.rabbitmq.exchange}")
     String exchange;
+
+    @Value("${e-cabs.rabbitmq.message.exchange}")
+    String messageExchange;
 
     @Value("${e-cabs.rabbitmq.routing-key.add}")
     String addRoutingKey;
@@ -40,6 +46,26 @@ public class RabbitConfig {
     @Bean
     DirectExchange exchange() {
         return new DirectExchange(exchange);
+    }
+
+    @Bean
+    FanoutExchange fanoutExchange() {
+        return new FanoutExchange(messageExchange);
+    }
+
+    @Bean
+    Binding exchangeBinding(FanoutExchange fanoutExchange, DirectExchange exchange) {
+        return BindingBuilder.bind(exchange).to(fanoutExchange);
+    }
+
+    @Bean
+    Queue messageAuditQueue() {
+        return new Queue(messageAuditQueueName, false);
+    }
+
+    @Bean
+    Binding messageAuditQueueBinding(Queue messageAuditQueue,FanoutExchange fanoutExchange) {
+        return BindingBuilder.bind(messageAuditQueue).to(fanoutExchange);
     }
 
     @Bean

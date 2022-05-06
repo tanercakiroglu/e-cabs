@@ -29,6 +29,8 @@ public class DeleteBookingRequest {
 
     private Integer waitingTime;
 
+    private boolean isAsap;
+
     private Integer numberOfPassengers;
 
     private BigDecimal price;

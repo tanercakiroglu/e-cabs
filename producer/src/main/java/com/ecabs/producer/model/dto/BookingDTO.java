@@ -1,7 +1,9 @@
 package com.ecabs.producer.model.dto;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -11,8 +13,11 @@ import java.util.Set;
 
 @Getter
 @Setter
+@ToString
+@EqualsAndHashCode
 public class BookingDTO implements Serializable {
 
+    private static final long serialVersionUID = 295598826387909517L;
     private Long id;
 
     private String passengerName;
@@ -26,6 +31,8 @@ public class BookingDTO implements Serializable {
     private Integer numberOfPassengers;
 
     private BigDecimal price;
+
+    private boolean asap;
 
     private Integer rating;
 

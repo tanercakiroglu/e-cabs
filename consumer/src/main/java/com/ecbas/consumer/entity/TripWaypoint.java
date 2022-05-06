@@ -26,6 +26,9 @@ public class TripWaypoint {
     @Digits(integer = 9, fraction = 6)
     private BigDecimal longitude;
 
+    @Column(name = "LOCALITY")
+    private String locality;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "BOOKING_ID")
     private Booking booking;

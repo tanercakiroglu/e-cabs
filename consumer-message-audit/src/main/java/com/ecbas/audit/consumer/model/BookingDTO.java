@@ -1,4 +1,4 @@
-package com.ecbas.consumer.model.dto;
+package com.ecbas.audit.consumer.model;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -17,7 +17,7 @@ import java.util.Set;
 @EqualsAndHashCode
 public class BookingDTO implements Serializable {
 
-    private static final long serialVersionUID = -7915134878480690288L;
+    private static final long serialVersionUID = -5250922909895859227L;
     private Long id;
 
     private String passengerName;
@@ -30,11 +30,11 @@ public class BookingDTO implements Serializable {
 
     private Integer numberOfPassengers;
 
+    private boolean asap;
+
     private BigDecimal price;
 
     private Integer rating;
-
-    private boolean asap;
 
     private LocalDateTime createDateTime;
 

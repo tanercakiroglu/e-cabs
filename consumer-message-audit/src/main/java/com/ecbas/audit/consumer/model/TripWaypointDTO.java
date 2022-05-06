@@ -1,4 +1,4 @@
-package com.ecbas.consumer.model.dto;
+package com.ecbas.audit.consumer.model;
 
 
 import lombok.EqualsAndHashCode;
@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 @EqualsAndHashCode
 public class TripWaypointDTO implements Serializable {
 
-    private static final long serialVersionUID = -6994790489541383369L;
+    private static final long serialVersionUID = 1082647715460681819L;
     private Long id;
 
     private BigDecimal latitude;

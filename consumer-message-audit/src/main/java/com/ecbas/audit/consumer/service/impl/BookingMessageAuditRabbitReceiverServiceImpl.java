@@ -1,5 +1,6 @@
 package com.ecbas.audit.consumer.service.impl;
 
+import com.ecabs.config.Loggable;
 import com.ecbas.audit.consumer.model.BookingDTO;
 import com.ecbas.audit.consumer.service.BookingMessageAuditRabbitReceiverService;
 import com.ecbas.audit.consumer.service.BookingMessageAuditService;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Loggable
 public class BookingMessageAuditRabbitReceiverServiceImpl implements BookingMessageAuditRabbitReceiverService {
 
     private final BookingMessageAuditService bookingMessageAuditService;

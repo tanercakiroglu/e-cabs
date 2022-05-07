@@ -44,22 +44,6 @@ public class BookingConsumerServiceImpl implements BookingConsumerService {
 
     @Override
     @Transactional
-    public List<BookingDTO> getAll() {
-        var list = bookingRepository.findAll();
-        return bookingMapper.toDtoList(list);
-    }
-
-    @Override
-    @Transactional
-    public BookingDTO getById(Long id) {
-        return bookingRepository.findById(id)
-                .map(bookingMapper::toDto).orElseThrow(() -> {
-                    throw new EntityNotFoundException(String.valueOf(id));
-                });
-    }
-
-    @Override
-    @Transactional
     public void deleteById(Long id) {
         bookingRepository.deleteById(id);
     }

@@ -9,7 +9,6 @@ import com.ecabs.producer.model.request.SaveBookingRequest;
 import com.ecabs.producer.model.request.UpdateBookingRequest;
 import com.ecabs.producer.service.BookingService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/bookings")
 @Loggable
 @RequiredArgsConstructor
-@Validated
 public class BookingController implements BookingOperations{
 
     private final BookingService bookingService;

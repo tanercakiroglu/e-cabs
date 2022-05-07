@@ -12,10 +12,6 @@ public interface BookingConsumerService {
 
     BookingDTO update(BookingDTO bookingDTO);
 
-    List<BookingDTO> getAll();
-
-    BookingDTO getById(Long id);
-
     @Transactional
     void deleteById(Long id);
 }

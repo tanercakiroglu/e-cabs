@@ -19,7 +19,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@EnableJpaRepositories(basePackages = {"com.*"})
+@EnableJpaRepositories(basePackages = {"com.ecabs.*"})
 @EnableTransactionManagement
 @Profile("test")
 @Log4j2
@@ -46,7 +46,7 @@ public class H2TestProfileJPAConfig {
     LocalContainerEntityManagerFactoryBean em
         = new LocalContainerEntityManagerFactoryBean();
     em.setDataSource(dataSource());
-    em.setPackagesToScan("com.*");
+    em.setPackagesToScan("com.ecabs.*");
     JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
     em.setJpaVendorAdapter(vendorAdapter);
     em.setJpaProperties(additionalProperties());
